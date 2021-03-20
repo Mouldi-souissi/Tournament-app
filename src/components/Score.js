@@ -5,7 +5,9 @@ import { useHistory } from "react-router";
 
 const Score = () => {
   // context
-  const { createMatches, handleRounds, players } = useContext(PlayersContext);
+  const { createMatches, handleRounds, players, round } = useContext(
+    PlayersContext
+  );
 
   // history
   let history = useHistory();
@@ -53,13 +55,14 @@ const Score = () => {
             ))}
         </tbody>
       </table>
-
-      <button
-        className="btn btn-dark col-3 text-nowrap float-end mt-4 mb-5"
-        onClick={handleNextRound}
-      >
-        Next Round
-      </button>
+      <div className="d-flex justify-content-end">
+        <button
+          className="btn btn-dark col-3 mt-4 mb-5"
+          onClick={handleNextRound}
+        >
+          Start Round {round + 1}
+        </button>
+      </div>
     </div>
   );
 };

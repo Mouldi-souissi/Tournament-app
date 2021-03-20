@@ -7,12 +7,16 @@ const Matches = () => {
   const { calculateScore, round, matches } = useContext(PlayersContext);
   let history = useHistory();
   const handleSave = () => {
-    calculateScore();
-    history.push("/score");
-    window.scroll({
-      top: 0,
-      behavior: "smooth",
-    });
+    if (matches.filter((el) => el.result).length === matches.length) {
+      calculateScore();
+      history.push("/score");
+      window.scroll({
+        top: 0,
+        behavior: "smooth",
+      });
+    } else {
+      alert("Results are missing");
+    }
   };
   return (
     <div className="container mt-5 mb-5">
@@ -21,12 +25,11 @@ const Matches = () => {
       {matches.map((match, i) => (
         <Match key={i} match={match} />
       ))}
-      <button
-        className="btn btn-dark mt-5 mb-5 float-end col-3"
-        onClick={handleSave}
-      >
-        Save
-      </button>
+      <div className="d-flex justify-content-end">
+        <button className="btn btn-dark mt-5 mb-5 col-3" onClick={handleSave}>
+          Save
+        </button>
+      </div>
     </div>
   );
 };

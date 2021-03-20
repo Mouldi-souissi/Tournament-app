@@ -38,8 +38,8 @@ const Match = ({ match }) => {
       className={`card p-4 shadow-sm mb-3 ${match.result && "bg-light"}`}
       style={{ borderRadius: "30px" }}
     >
-      <div className="mx-2  align-items-center">
-        <div className="col-md-12 d-flex justify-content-between">
+      <div className="mx-2 align-items-center">
+        <div className="col-md-12 d-flex justify-content-between px-3">
           <div className="text-primary">{match.player1?.name}</div>
           <div className="position-absolute start-50 translate-middle">
             <img src={versus} alt="vs" height="60px" className="pt-3" />
@@ -55,7 +55,7 @@ const Match = ({ match }) => {
             value={value}
             onChange={handleResult}
           >
-            <option value="select" disabled>
+            <option value="select" disabled hidden>
               Select result
             </option>
             <option value={match.player1?.name}>{match.player1?.name}</option>

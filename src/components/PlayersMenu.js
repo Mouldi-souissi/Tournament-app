@@ -17,15 +17,17 @@ const PlayersMenu = () => {
   };
 
   //   add player
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.preventDefault();
     let copy = value;
-    addPlayers(copy);
+    copy && addPlayers(copy);
     setValue("");
   };
 
   //   handle enter
   const handleEnter = (e) => {
-    if (e.charCode === 13) {
+    if (e.charCode === 13 && e.target.value) {
+      e.preventDefault();
       let copy = value;
       addPlayers(copy);
       setValue("");
@@ -45,26 +47,24 @@ const PlayersMenu = () => {
         style={{ borderRadius: "20px" }}
       >
         <h5 className="mb-3">Add player</h5>
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="enter name"
-            aria-label="Recipient's username"
-            aria-describedby="button-addon2"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            onKeyPress={handleEnter}
-          />
-          <button
-            className="btn btn-dark"
-            type="button"
-            id="button-addon2"
-            onClick={handleAdd}
-          >
-            Add
-          </button>
-        </div>
+        <form onSubmit={handleAdd}>
+          <div className="input-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="enter name"
+              aria-label="Recipient's username"
+              aria-describedby="button-addon2"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onKeyPress={handleEnter}
+              required
+            />
+            <button className="btn btn-dark" type="submit" id="button-addon2">
+              Add
+            </button>
+          </div>
+        </form>
       </div>
       {players.length !== 0 && <PlayersList players={players} />}
       {players.length > 3 && (
