@@ -7,6 +7,7 @@ const PlayersContextProvider = (props) => {
   // state
   const [players, setPlayers] = useState([]);
   const [matches, setMatches] = useState([]);
+  let [round, setRound] = useState(1);
 
   // add players
   const addPlayers = (player) => {
@@ -42,7 +43,10 @@ const PlayersContextProvider = (props) => {
               win: matches[i].result.winner.win + 1,
               pts: matches[i].result.winner.pts + 3,
             },
-            { ...matches[i].result.looser, loss: 1 },
+            {
+              ...matches[i].result.looser,
+              loss: matches[i].result.looser.loss + 1,
+            },
           ];
         }
         if (
@@ -59,7 +63,7 @@ const PlayersContextProvider = (props) => {
             {
               ...matches[i].player2,
               draw: matches[i].player2.draw + 1,
-              pts: matches[i].player1.pts + 1,
+              pts: matches[i].player2.pts + 1,
             },
           ];
         }
@@ -68,6 +72,10 @@ const PlayersContextProvider = (props) => {
     setPlayers(copy);
   };
 
+  // handle rounds
+  const handleRounds = () => {
+    setRound((round = round + 1));
+  };
   return (
     <PlayersContext.Provider
       value={{
@@ -77,6 +85,8 @@ const PlayersContextProvider = (props) => {
         matches,
         enterResult,
         calculateScore,
+        round,
+        handleRounds,
       }}
     >
       {props.children}

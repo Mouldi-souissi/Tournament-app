@@ -40,7 +40,7 @@ const PlayersMenu = () => {
             onKeyPress={handleEnter}
           />
           <button
-            className="btn btn-primary"
+            className="btn btn-dark"
             type="button"
             id="button-addon2"
             onClick={handleAdd}
@@ -50,10 +50,9 @@ const PlayersMenu = () => {
         </div>
       </div>
       {players.length !== 0 && <PlayersList players={players} />}
-
       {players.length > 3 && (
         <button
-          className="btn btn-primary btn-lg col-md-6"
+          className="btn btn-dark col-3 mb-5"
           onClick={() => createMatches(players)}
         >
           Start

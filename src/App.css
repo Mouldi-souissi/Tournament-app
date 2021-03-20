@@ -27,3 +27,8 @@ select:focus {
   border-color: grey !important;
   box-shadow: none !important;
 }
+
+.btn-dark {
+  background-color: #f29a2f;
+  border: grey;
+}
