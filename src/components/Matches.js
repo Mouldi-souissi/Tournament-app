@@ -9,6 +9,10 @@ const Matches = () => {
   const handleSave = () => {
     calculateScore();
     history.push("/score");
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
   };
   return (
     <div className="container mt-5 mb-5">
