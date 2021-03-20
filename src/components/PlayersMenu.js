@@ -1,18 +1,28 @@
 import React, { useState, useContext } from "react";
 import { PlayersContext } from "../context/PlayersContext";
 import PlayersList from "./PlayersList";
+import { useHistory } from "react-router";
 
 const PlayersMenu = () => {
   // state
   const [value, setValue] = useState("");
+
   // context
   const { players, addPlayers, createMatches } = useContext(PlayersContext);
+
+  // redirect
+  let history = useHistory();
+  const redirect = () => {
+    history.push("/matches");
+  };
+
   //   add player
   const handleAdd = () => {
     let copy = value;
     addPlayers(copy);
     setValue("");
   };
+
   //   handle enter
   const handleEnter = (e) => {
     if (e.charCode === 13) {
@@ -21,6 +31,13 @@ const PlayersMenu = () => {
       setValue("");
     }
   };
+
+  // handle start
+  const handleStart = () => {
+    createMatches(players);
+    redirect();
+  };
+
   return (
     <div className="container">
       <div
@@ -51,10 +68,7 @@ const PlayersMenu = () => {
       </div>
       {players.length !== 0 && <PlayersList players={players} />}
       {players.length > 3 && (
-        <button
-          className="btn btn-dark col-3 mb-5"
-          onClick={() => createMatches(players)}
-        >
+        <button className="btn btn-dark col-3 mb-5" onClick={handleStart}>
           Start
         </button>
       )}

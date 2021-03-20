@@ -1,10 +1,15 @@
 import React, { useContext } from "react";
 import { PlayersContext } from "../context/PlayersContext";
 import winner from "../assets/cup-winner.gif";
+import { useHistory } from "react-router";
 
-const Score = ({ players }) => {
+const Score = () => {
   // context
-  const { createMatches, handleRounds } = useContext(PlayersContext);
+  const { createMatches, handleRounds, players } = useContext(PlayersContext);
+
+  // history
+  let history = useHistory();
+
   // functions
   const handleNextRound = () => {
     createMatches();
@@ -13,12 +18,12 @@ const Score = ({ players }) => {
       top: 0,
       behavior: "smooth",
     });
+    history.push("/matches");
   };
+
   return (
     <div className="container">
-      {/* <h3 className="text-center" style={{ paddingTop: "100px" }}>
-        Score table
-      </h3> */}
+      <h3 className="text-center pt-5 pb-3">Score table</h3>
 
       <table className="table">
         <thead className="table-dark align-middle">
