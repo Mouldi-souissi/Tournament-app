@@ -36,8 +36,12 @@ const PlayersMenu = () => {
 
   // handle start
   const handleStart = () => {
-    createMatches(players);
-    redirect();
+    if (players.length % 2 === 0) {
+      createMatches(players);
+      redirect();
+    } else {
+      alert("Players number should be even");
+    }
   };
 
   return (

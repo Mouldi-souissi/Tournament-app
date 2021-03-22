@@ -17,6 +17,20 @@ const PlayersContextProvider = (props) => {
     ]);
   };
 
+  // delete player
+  const deletePlayer = (id) => {
+    setPlayers(players.filter((player) => player !== players[id]));
+  };
+
+  // edit player
+  const editPlayer = (id, edit) => {
+    setPlayers(
+      players.map((player) =>
+        player === players[id] ? { ...player, name: edit } : player
+      )
+    );
+  };
+
   //   gen matches
   const createMatches = () => {
     setMatches(matchGen(players));
@@ -87,6 +101,8 @@ const PlayersContextProvider = (props) => {
         calculateScore,
         round,
         handleRounds,
+        deletePlayer,
+        editPlayer,
       }}
     >
       {props.children}

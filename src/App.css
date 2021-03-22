@@ -32,3 +32,11 @@ select:focus {
   background-color: #f29a2f;
   border: grey;
 }
+
+.playerIcon:hover {
+  color: #f29a2f;
+}
+
+.edit-player {
+  border: none;
+}
