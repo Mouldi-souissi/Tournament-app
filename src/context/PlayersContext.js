@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import matchGen from "../functions/matchGen";
 
 export const PlayersContext = createContext();
@@ -8,6 +8,29 @@ const PlayersContextProvider = (props) => {
   const [players, setPlayers] = useState([]);
   const [matches, setMatches] = useState([]);
   let [round, setRound] = useState(1);
+
+  // effect load from local storage
+  useEffect(() => {
+    const json = localStorage.getItem("tournament");
+    const savedPlayers = JSON.parse(json)?.players;
+    const savedMatches = JSON.parse(json)?.matches;
+    const savedRound = JSON.parse(json)?.round;
+    if (savedPlayers) {
+      setPlayers(savedPlayers);
+    }
+    if (savedMatches) {
+      setMatches(savedMatches);
+    }
+    if (savedRound) {
+      setRound(savedRound);
+    }
+  }, []);
+
+  // effect save to local storage
+  useEffect(() => {
+    const json = JSON.stringify({ players, matches, round });
+    localStorage.setItem("tournament", json);
+  }, [players, matches, round]);
 
   // add players
   const addPlayers = (player) => {
